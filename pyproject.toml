@@ -1,0 +1,48 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "curiator"
+dynamic = ["version"]
+description = "CURIAtor: feature-space guided temporal phase selection for breast DCE-MRI"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Benjamin Hamm", email = "benjamin.hamm@dkfz-heidelberg.de" }]
+keywords = ["breast MRI", "DCE-MRI", "foundation model", "phase selection", "medical imaging"]
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+dependencies = [
+    "numpy>=1.24",
+    "SimpleITK>=2.2",
+    "torch>=2.0",
+    "torchvision",
+    "transformers>=4.51",
+    "huggingface_hub",
+    "pillow",
+]
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.7"]
+dev = ["pytest>=7", "matplotlib>=3.7"]
+
+[project.scripts]
+curiator = "curiator.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/MIC-DKFZ/CURIAtor"
+Training = "https://github.com/MIC-DKFZ/MeisenMeister"
+
+[tool.hatch.version]
+path = "src/curiator/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/curiator"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
